@@ -13,13 +13,19 @@ from astropy.coordinates import ICRS
 import astropy.units as u
 import requests
 
-class_names = ['star','galaxy', 'QSO', 'AGN'] 
-## Queries für star, galaxy, quasar und AGN
+########## Input ##########
 
-query1 = "SELECT top 1000 plate, mjd, min(fiberid) as fiberid, class FROM SpecObj WHERE class = 'star' GROUP BY plate, mjd, class ORDER BY plate, mjd, class"
-query2 = "SELECT top 1000 plate, mjd, min(fiberid) as fiberid, class FROM SpecObj WHERE class = 'galaxy' AND subClass != 'AGN' GROUP BY plate, mjd, class ORDER BY plate, mjd, class"
-query3 = "SELECT top 1000 plate, mjd, min(fiberid) as fiberid, class FROM SpecObj WHERE class = 'QSO' AND subClass != 'AGN' GROUP BY plate, mjd, class ORDER BY plate, mjd, class"
-query4 = "SELECT top 1000 plate, mjd, min(fiberid) as fiberid, class FROM SpecObj WHERE subClass = 'AGN' GROUP BY plate, mjd, class ORDER BY plate, mjd, class"
+targer_directory = 'F:\data\spectral_fits\\'
+class_names = ['star','galaxy', 'QSO', 'AGN'] 
+samples_per_class = 1000
+
+## Queries für star, galaxy, quasar und AGN
+query1 = "SELECT top" + str(samples_per_class) + "plate, mjd, min(fiberid) as fiberid, class FROM SpecObj WHERE class = 'star' GROUP BY plate, mjd, class ORDER BY plate, mjd, class"
+query2 = "SELECT top " + str(samples_per_class) + " plate, mjd, min(fiberid) as fiberid, class FROM SpecObj WHERE class = 'galaxy' AND subClass != 'AGN' GROUP BY plate, mjd, class ORDER BY plate, mjd, class"
+query3 = "SELECT top " + str(samples_per_class) + " plate, mjd, min(fiberid) as fiberid, class FROM SpecObj WHERE class = 'QSO' AND subClass != 'AGN' GROUP BY plate, mjd, class ORDER BY plate, mjd, class"
+query4 = "SELECT top " + str(samples_per_class) + " plate, mjd, min(fiberid) as fiberid, class FROM SpecObj WHERE subClass = 'AGN' GROUP BY plate, mjd, class ORDER BY plate, mjd, class"
+
+########## Program ##########
 
 queries = [query1, query2, query3, query4]
 
@@ -45,7 +51,7 @@ for i in range(4):
         url = sdss_path + name
         r = requests.get(url)
 
-        target_file = 'F:\data\spectral_fits\\' + class_names[i] + '\\' + name[5:]
+        target_file = targer_directory + class_names[i] + '\\' + name[5:]
 
         with open(target_file,'wb') as f:
 
