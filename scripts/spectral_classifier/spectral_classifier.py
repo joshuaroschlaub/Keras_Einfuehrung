@@ -55,14 +55,14 @@ data_test_r  = np.reshape(data_test, newshape=(len(data_test), input_shape[0], i
 
 # Netzwerk erstellen
 model = Sequential([
-    Conv1D(filters=64, kernel_size=80, strides=10, activation='relu', input_shape=(3522,1)), # stride
-    MaxPooling1D(3), #Pooling verringert Accuracy leicht aber verhindert overfitting
+    Conv1D(filters=64, kernel_size=80, strides=10, activation='relu', input_shape=(3522,1)),
+    MaxPooling1D(3),
     Dropout(0.35),
     Conv1D(filters=128, kernel_size=40, strides=10, activation='relu'),
     MaxPooling1D(3),
     Dropout(0.35),
     Flatten(),
-    Dense(units=128, activation='relu'), # Droput, weniger neuronen
+    Dense(units=128, activation='relu'),
     Dropout(0.35),
     Dense(units=4, activation='softmax')
 ])
@@ -70,8 +70,8 @@ model = Sequential([
 model.compile(optimizer='Adam', loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-x_train = data_training_r
-x_test = data_test_r
+x_train = tf.keras.utils.normalize(data_training_r, axis=1)
+x_test = tf.keras.utils.normalize(data_test_r, axis=1)
 
 y_train = labels_training
 y_test = labels_test
