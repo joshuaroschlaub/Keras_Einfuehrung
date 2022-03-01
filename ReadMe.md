@@ -18,7 +18,7 @@ pip install tensorflow
 
 ## Benutzung
 
-Eine umfangreiche Erklärung findet sich in der Datei Dokumentation.pdf. Im Ordner Notebooks sind Jupyter-Notebooks zu finden auf die in der Dokumentation und den Folien eingegangen wird. Beschäftigt wird sich im wesentlichen mit der Erstellung von zwei Neuronalen Netzen: Für die Klassifizierung von handschriftlich geschriebenen Ziffern und für die Klassifizierung von SDSS Spektren. 
+Eine umfangreiche Einführung in das Thema Machine Learning und die Benutzung des HPC Clusters findet man in der Dokumentation. Eine kompakte Version bieten die Folien. Im Notebooks-Ordner sind alle Jupyter-Notebooks zu finden auf die in der Dokumentation und den Folien eingegangen wird. Beschäftigt wird sich im wesentlichen mit der Erstellung von zwei Neuronalen Netzen: Einem Netzwerk für die Klassifizierung von handschriftlich geschriebenen Ziffern und einem Netzwerk für für die Klassifizierung von SDSS Spektren. 
 
 ## Framework
 Conda 4.10.1
